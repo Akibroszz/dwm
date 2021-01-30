@@ -14,7 +14,7 @@ static const int focusonwheel       = 0;
 static const char *fonts[]          = { "Hack Nerd Font:size=10:antialias=true:autohint=true",
                                         "Mononoki Nerd Font:size=10:antialias=true:autohint=true",
                                         "Iosevka Nerd Font:size=10:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Hack Nerd Font:size=10:antialias=true:autohint=true";
+static const char dmenufont[]       =   "Hack Nerd Font:size=10:antialias=true:autohint=true";
 
 static const char col_bg[]                  = "#282a36";
 static const char col_fg[]                  = "#f8f8f2";
@@ -46,8 +46,6 @@ static const Rule rules[] = {
 	/* class               instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",              NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",           NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "arcologout.py",     NULL,       NULL,       1 << 8,       1,           -1 },
-	{ "Arcolinux Logout",  NULL,       NULL,       1 << 8,       1,           -1 },
 };
 
 /* layout(s) */
@@ -86,9 +84,12 @@ static const char *termcmd[]  = { terminal, NULL };
 static const char *browsercmd[] = { browser, NULL };
 static const char *emacscmd[] = { "emacsclient", "-c", "-a", "emacs", NULL };
 
-static const char *raisevolumecmd[] = { "amixer", "set", "Master", "10%+", NULL };
-static const char *lowervolumecmd[] = { "amixer", "set", "Master", "10%-", NULL };
+static const char *raisevolumecmd[] = { "amixer", "set", "Master", "5%+", NULL };
+static const char *lowervolumecmd[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char *muteaudiocmd[]  = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL };
+
+static const char *raisebacklightcmd[] = { "xbacklight", "-inc", "2", NULL };
+static const char *lowerbacklightcmd[] = { "xbacklight", "-dec", "2", NULL };
 
 static const char *screenshotcmd[] = { "scrot", "'Screenshot-%Y-%m-%d-%H_%M.jpg'", "-q", "20", "&&", "mv", "$HOME/Pictures/Screenshots", NULL };
 
@@ -152,6 +153,10 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioMute,		    spawn,	        {.v = muteaudiocmd } },	
 	{ 0,                            XF86XK_AudioRaiseVolume,	spawn,		    {.v = raisevolumecmd } },
 	{ 0,                            XF86XK_AudioLowerVolume,	spawn,		    {.v = lowervolumecmd } },
+
+	/* Backlight */
+	{ 0,                            XF86XK_MonBrightnessUp,	    spawn,          {.v = raisebacklightcmd} },
+	{ 0,                            XF86XK_MonBrightnessDown,	spawn,          {.v = lowerbacklightcmd} },
 
 	/* Screenshots */
 	{ 0,                            XK_Print,                   spawn,          {.v = screenshotcmd } },
