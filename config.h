@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Variables */
-static const char browser[] = "librewolf";
-static const char terminal[] = "st";
+static const char browser[]         = "librewolf";
+static const char terminal[]        = "st";
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -16,20 +16,46 @@ static const char *fonts[]          = { "Hack Nerd Font:size=10:antialias=true:a
                                         "Iosevka Nerd Font:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]       =   "Hack Nerd Font:size=10:antialias=true:autohint=true";
 
-static const char col_bg[]                  = "#282a36";
-static const char col_fg[]                  = "#f8f8f2";
-static const char col_fg_focus[]            = "#ff79c6";
-static const char col_border[]              = "#44475a";
-static const char col_border_focus[]        = "#ff79c6";
-static const unsigned int baralpha = 0xEE;
+/* DRACULA THEME */
+static const char norm_bg[]         = "#282a36";
+static const char norm_fg[]         = "#f8f8f2";
+static const char norm_border[]     = "#44475a";
+
+static const char sel_bg[]          = "#282a36";
+static const char sel_fg[]          = "#ff79c6";
+static const char sel_border[]      = "#ff79c6";
+
+static const char urg_bg[]          = "#282a36";
+static const char urg_fg[]          = "#ff79c6";
+static const char urg_border[]      = "#ff79c6";
+
+/* NORD THEME */
+//static const char norm_fg[]         = "#88C0D0";
+//static const char norm_bg[]         = "#2E3440";
+//static const char norm_border[]     = "#4C566A";
+
+//static const char bar_border[]      = "#4C566A";
+
+//static const char sel_fg[]          = "#D08770";
+//static const char sel_bg[]          = "#4C566A";
+//static const char sel_border[]      = "#8FBCBB";
+
+//static const char urg_fg[]          = "#8FBCBB";
+//static const char urg_bg[]          = "#88C0D0";
+//static const char urg_border[]      = "#88C0D0";
+
+/* static const char status_fg[]      = "#B48EAD"; */
+
+static const unsigned int baralpha    = 0xEE;
 static const unsigned int borderalpha = OPAQUE;
-static const char *colors[][3]      = {
-	/*               fg            bg         border   */
-	[SchemeNorm] = { col_fg,       col_bg,    col_border },
-	[SchemeSel]  = { col_fg_focus, col_bg,    col_border_focus  },
+static const char *colors[][3]        = {
+	/*               fg           bg         border                         */
+    [SchemeNorm]    = { norm_fg,  norm_bg,   norm_border }, // unfocused wins
+    [SchemeSel]     = { sel_fg,   sel_bg,    sel_border },  // the focused win
+//    [SchemeUrg]     = { urg_fg,   urg_bg,    urg_border },
 };
 
-static const unsigned int alphas[][3]      = {
+static const unsigned int alphas[][3] = {
 	/*               fg      bg        border     */
 	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
@@ -79,30 +105,30 @@ static const Layout layouts[] = {
 /* component of dmenucmd, manipulated in spawn() */
 static char dmenumon[2] = "0"; 
 
-static const char *dmenucmd[] = { "dmenu_run", "-p", "Run: ", NULL };
-static const char *termcmd[]  = { terminal, NULL };
-static const char *browsercmd[] = { browser, NULL };
-static const char *emacscmd[] = { "emacsclient", "-c", "-a", "emacs", NULL };
+static const char *dmenucmd[]          = { "dmenu_run", "-p", "Run: ", NULL };
+static const char *termcmd[]           = { terminal, NULL };
+static const char *browsercmd[]        = { browser, NULL };
+static const char *emacscmd[]          = { "emacsclient", "-c", "-a", "emacs", NULL };
 
-static const char *raisevolumecmd[] = { "amixer", "set", "Master", "5%+", NULL };
-static const char *lowervolumecmd[] = { "amixer", "set", "Master", "5%-", NULL };
-static const char *muteaudiocmd[]  = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL };
+static const char *raisevolumecmd[]    = { "amixer", "set", "Master", "5%+", NULL };
+static const char *lowervolumecmd[]    = { "amixer", "set", "Master", "5%-", NULL };
+static const char *muteaudiocmd[]      = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL };
 
 static const char *raisebacklightcmd[] = { "xbacklight", "-inc", "2", NULL };
 static const char *lowerbacklightcmd[] = { "xbacklight", "-dec", "2", NULL };
 
-static const char *screenshotcmd[] = { "scrot", "'Screenshot-%Y-%m-%d-%H_%M.jpg'", "-q", "20", "&&", "mv", "$HOME/Pictures/Screenshots", NULL };
+static const char *screenshotcmd[]     = { "scrot", "'Screenshot-%Y-%m-%d-%H_%M.jpg'", "-q", "20", "&&", "mv", "$HOME/Pictures/Screenshots", NULL };
 
 /* A menu for logging out, hibernating, shutting of, ... */
 static const char *accountmanagercmd[] = { "arcolinux-logout", NULL };
 
 /* Scratchpad */
-static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { terminal, "-t", scratchpadname, "-g", "120x34", NULL };
+static const char scratchpadname[]     = "scratchpad";
+static const char *scratchpadcmd[]     = { terminal, "-t", scratchpadname, "-g", "120x34", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
-static char *statuscmds[] = { "notify-send Mouse$BUTTON" };
-static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
+static char *statuscmds[]              = { "notify-send Mouse$BUTTON" };
+static char *statuscmd[]               = { "/bin/sh", "-c", NULL, NULL };
 
 #include <X11/XF86keysym.h>
 
